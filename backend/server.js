@@ -3,12 +3,12 @@ require('dotenv').config()
 const express = require('express')
 const connectToMongo = require('./db')
 
+//instance for mongodb
 connectToMongo();
-
 //creating an instance for  express
 const app = express()
 
-app.use(express.json())
+app.use(express.json())     //middleware required as we are using req.body
 //Available routes
 app.get('/',(req,res) => {
   res.json({msg : 'welcome to the app'})
