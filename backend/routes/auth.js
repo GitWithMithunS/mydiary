@@ -5,9 +5,9 @@ const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const fetchUser = require("../Middleware/Fetchuserdata");
+require("dotenv").config();
 
-//json webtoken is signed from a secret(this  secret should be kept safe and not be accessed by others execpt my server)
-const JWT_SECRET = "itsthebackendpart";
+const secret = process.env.JWT_SECRET; //json webtoken is signed from a secret(this  secret should be kept safe and not be accessed by others execpt my server)
 
 //Route 1 :create a user using post '/api/auth/createuser'(post not working ). no login required
 router.post(
@@ -49,7 +49,7 @@ router.post(
       const data = {
         id: user.id,
       };
-      const authtoken = jwt.sign(data, JWT_SECRET);
+      const authtoken = jwt.sign(data, secret);
       console.log(authtoken);
       res.json({ authToken: authtoken });
     } catch (error) {
@@ -88,10 +88,11 @@ router.post(
           .status(400)
           .json({ error: "please try to login with correct credentials" });
       }
+      
       const data = {
         id: user.id,
       };
-      const authtoken = jwt.sign(data, JWT_SECRET);
+      const authtoken = jwt.sign(data, secret);
       console.log(authtoken);
       res.json({ authToken: authtoken });
     } catch (error) {
@@ -104,8 +105,8 @@ router.post(
 //Route 3 :get loggin user details using :  '/api/auth/getuser'. login required
 router.get("/getuser", fetchUser, async (req, res) => {
   try {
-    const userid = req.user.id;
-    console.log(userid)
+    const userid = req.user;
+    console.log(userid);
     const user = await User.findById(userid).select("-password");
     res.send(user);
   } catch (error) {
