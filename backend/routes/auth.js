@@ -53,7 +53,7 @@ router.post(
       console.log(authtoken);
       res.json({ authToken: authtoken });
     } catch (error) {
-      // console.error(error.message);
+      console.error(error.message);
       res.status(500).send("internal server error occured");
     }
   }
@@ -102,7 +102,7 @@ router.post(
   }
 );
 
-//Route 3 :get loggin user details using :  '/api/auth/getuser'. login required
+//Route 3 :get loggin user details using GET:  '/api/auth/getuser'. login required
 router.get("/getuser", fetchUser, async (req, res) => {
   try {
     const userid = req.user;
