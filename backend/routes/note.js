@@ -2,12 +2,12 @@ const express = require("express");
 const router = express.Router();
 const { body, validationResult } = require("express-validator");
 const fetchUser = require("../Middleware/Fetchuserdata");
-const notes = require("../mongoose_models/notes");
+const Note = require("../mongoose_models/Notes");
 
 //Route 1 :get all notes of user using : GET '/api/note'. login required
 router.get("/fetchallnotes", fetchUser, async (req, res) => {
   try {
-    const Notes = await notes.find({ user: req.user.id });
+    const Notes = await Note.find({ user: req.user.id });
     res.json(Notes);
   } catch (error) {
    console.error(error.message);
@@ -15,7 +15,7 @@ router.get("/fetchallnotes", fetchUser, async (req, res) => {
   }
 });
 
-//Route 1 :add a new note  using : GET '/api/note'. login required
+//Route 2 :add a new note  using : GET '/api/note'. login required
 router.post(
   "/addnotes",
   fetchUser,
@@ -36,7 +36,7 @@ router.post(
         return res.status(400).json({ errors: errors.array() });
       }
 
-      const note = new note({
+      const note = new Note({
         title,description,tag,user: req.user.id,
       });
       const savednote = await note.save();
