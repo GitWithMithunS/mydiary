@@ -19,7 +19,7 @@ app.use('/api/note',require('./routes/note'))
 //listen for the incoming http requests (it can be in any port here it is http://localhost:4000/)
 const port =  4000       //process.env.PORT
 app.listen(port,() => {
-  console.log(`listening on port ${port}`)
+  console.log(`MyDiary listening on port ${port}`)
 })
 
 

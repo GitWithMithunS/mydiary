@@ -12,11 +12,11 @@ const NoteState = (props) => {
             setstate({
                 "name":"chakravarthi",
                 "class":"2csec"
-            },5000)
+            })
         },5000)
     }
     return(
-        <notecontext.Provider value={{state,update}}>      {/*value={{state:state,update:update}} it can be writtten in both this ways  */} 
+        <notecontext.Provider value={{state:state,update:update}}>      {/*value={{state,update}} it can be writtten in both this ways  */} 
             {props.children}
         </notecontext.Provider>
     )
