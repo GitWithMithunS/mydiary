@@ -7,7 +7,8 @@ const jwt = require("jsonwebtoken");
 const fetchUser = require("../Middleware/Fetchuserdata");
 require("dotenv").config();
 
-const secret = process.env.JWT_SECRET; //json webtoken is signed from a secret(this  secret should be kept safe and not be accessed by others execpt my server)
+// const secret = process.env.JWT_SECRET; //json webtoken is signed from a secret(this  secret should be kept safe and not be accessed by others execpt my server)
+const secret = "itsthebackendpart"
 
 //Route 1 :create a user using post '/api/auth/createuser'(post not working ). no login required
 router.post(

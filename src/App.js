@@ -37,24 +37,25 @@ import {
   Route,
   Routes,
 } from "react-router-dom";
-import Navbar from './Navbar/Navbar';
-import Home from './Home/Home';
-import About from './About/About';
+import Navbar from './Components/Navbar/Navbar';
+import Home from './Components/Home';
+import About from './Components/About';
 import NoteState from './context/notes/NoteState';
+import Alert from './Components/Alert';
 
 function App() {
   return (
     <>
       <NoteState>
         <BrowserRouter >
-          <Navbar />
-            <div className="container my-3">
-                <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-          </Routes>
-            </div>
-        
+          <Navbar/>
+          <Alert/>
+          <div className="container my-3">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+            </Routes>
+          </div>
         </BrowserRouter>
       </NoteState>
     </>

@@ -12,7 +12,7 @@ export default function About() {
     <>
       <div>All About Me</div>
       <div>
-        this is about {a.state.name} of class {a.state.class}
+        <p>this is about {a.state.name} of class {a.state.class}</p>
       </div>
     </>
    
