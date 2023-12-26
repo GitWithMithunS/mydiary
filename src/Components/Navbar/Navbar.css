@@ -1,3 +1,54 @@
 .navbar{
-    background-color: aquamarine;
+    background-color: rgb(241, 251, 252);
+}
+.navcont{
+    width: 100%;
+    position: fixed;
+    z-index: 99;
+    transition: 0.4s;
+   
+}
+.nav{
+    background: url('./nav-bg.jpeg') ;
+    /* background-color:rgb(240, 196, 75); */
+    height: 50px;
+}
+.navbar-brand{
+    color: rgb(75, 43, 6);
+    font-size: x-large;
+
+}
+.navpop{
+    margin: 0px 5px ;
+    color: white;
+    font-size: large;
+    font-weight:500 ;
+}
+.navpop:hover{
+    transform: scale(1.05);
+    font-weight: 500;
+    font-size:larger;
+    color: rgb(16, 137, 141);
+    border: 1px solid black;
+    border-radius: 5px;
+    -webkit-box-shadow: 13px 13px 13px 0px rgb(224, 181, 39);
+    -moz-box-shadow: 13px 13px 13px 0px rgb(224, 181, 39);
+    box-shadow: 13px 13px 13px 0px rgb(224, 181, 39);
+
+}
+.read{
+    width: max-content;
+    margin-top:20px ;
+    color: #f3cf87;
+}
+.navjustify{
+    display: flex;
+    justify-content: space-between;
+}
+.login{
+    background-color: rgb(87, 42, 5);
+    color: white;
+}
+.login:hover{
+    color: rgb(255, 255, 255);
 }

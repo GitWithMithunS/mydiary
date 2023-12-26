@@ -42,6 +42,8 @@ import Home from './Components/Home';
 import About from './Components/About';
 import NoteState from './context/notes/NoteState';
 import Alert from './Components/Alert';
+import Login from './Components/Login/Login';
+import Signup from './Components/Login/Signup';
 
 function App() {
   return (
@@ -50,10 +52,12 @@ function App() {
         <BrowserRouter >
           <Navbar/>
           <Alert/>
-          <div className="container my-3">
+          <div className="container my-0  ">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
             </Routes>
           </div>
         </BrowserRouter>

@@ -8,10 +8,10 @@ const NotesItem = (props) => {
     const context = useContext(notecontext)
     const {deletenote  } = context
     const { note , updatenote } = props
-    console.log(updatenote)
+    // console.log("this is update from notesitem" ,updatenote)
     return (
         <>
-            <div className='col-md-3 my-3'>
+            <div className='col-md-6 my-4'>
              
                 <div className="card my-3" >
 
@@ -20,11 +20,10 @@ const NotesItem = (props) => {
                             <p className="card-text">{note.description}</p>
                             {/* <a href="/" className="btn btn-primary">Go somewhere</a> */}
                             <div className="d-flex justify-content-end ">
-                            <FontAwesomeIcon className="icon my-3 " fade  icon={faTrash} onClick={() => {deletenote(note._id)}} style={{color: "#16cdda",}} />
-                            <FontAwesomeIcon className="icon my-3 m-3"  bounce icon={faPenToSquare} onClick={()=> {updatenote(note)}} style={{color: "#16cdda",}} />
+                            <FontAwesomeIcon className="icon  mx-4" fade  icon={faTrash} onClick={() => {deletenote(note._id)}} style={{color: "#16cdda",}} />
+                            <FontAwesomeIcon className="icon " data-bs-toggle="modal" data-bs-target="#exampleModal" bounce icon={faPenToSquare} onClick={()=> {updatenote(note)}} style={{color: "#16cdda",}} />
                             </div>
-                        </div>
-                                                                          
+                        </div>                                                                     
                 </div>
             </div>
         </>

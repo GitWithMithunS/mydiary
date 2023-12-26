@@ -19,6 +19,7 @@ router.post(
     body("password", "your password is very weak").isLength({ min: 5 }),
   ],
   async (req, res) => {
+    let success = true
     // console.log(req.body)    //conatins info of wt is their in the body of request
     // const user =User(req.body)
     // user.save()         // .save() is a method used in mongoose to save a new or updated document
@@ -27,7 +28,7 @@ router.post(
     //if their are any errors , return bad request and the error
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(400).json({ success,errors: errors.array() });
     }
 
     //check whether the user with this email exists already.
@@ -50,9 +51,11 @@ router.post(
       const data = {
         id: user.id,
       };
+
       const authtoken = jwt.sign(data, secret);
       console.log(authtoken);
-      res.json({ authToken: authtoken });
+      success = true
+      res.json({ success,authToken: authtoken });
     } catch (error) {
       console.error(error.message);
       res.status(500).send("internal server error occured");
@@ -68,6 +71,7 @@ router.post(
     body("password", "password can not be blank"),
   ],
   async (req, res) => {
+    let success = false
     //if their are any errors , return bad request and the error
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -85,15 +89,16 @@ router.post(
 
       const passwordcompare = await bcrypt.compare(password, user.password);
       if (!passwordcompare) {
-        return res
-          .status(400)
-          .json({ error: "please try to login with correct credentials" });
+        success = false
+        return res.status(400).json({success , error: "please try to login with correct credentials" });
+          
       }
       
       const data = {
         id: user.id,
       };
       const authtoken = jwt.sign(data, secret);
+      success =true
       console.log(authtoken);
       res.json({ authToken: authtoken });
     } catch (error) {

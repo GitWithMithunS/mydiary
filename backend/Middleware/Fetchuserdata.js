@@ -5,8 +5,7 @@ require('dotenv').config()
 const secret = "itsthebackendpart"
 const fetchuser = (req, res, next) => {
   //get the user from the jwt token and add id to req object
-  const token = req.header("auth-token");
-  console.log("token from middleware"+token)
+  const token = req.header("Authorization");
   if (!token) {
     res.status(401).send({ error: "please authenticate using a valid token" });
   }
