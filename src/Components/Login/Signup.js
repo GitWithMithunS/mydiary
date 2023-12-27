@@ -6,7 +6,8 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faLock, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
-export default function Signup() {
+export default function Signup(props) {
+  const {showalert} = props
 
   const [credentials,setcredentials] = useState({name:"",email:"" ,password:"",confirmpass:""})
   const navigate = useNavigate();
@@ -30,9 +31,11 @@ export default function Signup() {
         console.log(stor)
         // history.push('/')
         navigate("/")
+        showalert("Account created successfully","success")
       }
       else{
-        alert('invalid credientials')
+        // alert('invalid credientials')   -->this default alert message from react or js
+        showalert("Invalid credentials","danger")
       }
 }
 
@@ -48,7 +51,7 @@ const onchange = (e) => {
     <div className="container loginmain">
                 <div className="wrapper">
                     <form onSubmit={handlesubmit} >
-                        <h1>Signup</h1>
+                        <h1 className='login-signup'>Create an Account</h1>
                         <div className="input-box">                                 {/* do not forget to give name attribute. */}
                             <input type="text" placeholder='Username' name="name" onChange={onchange} required minLength={3} />  
                             <div className="icon"><FontAwesomeIcon icon={faUser} /></div>

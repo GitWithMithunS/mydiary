@@ -3,8 +3,15 @@ import './Navbar.css'
 import {
   Link
 } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 export default function Navbar() {
+  const navigate = useNavigate()
+
+  const handellogout = () => {
+    localStorage.removeItem('token')
+    navigate('/login')
+  }
   
   return (
     // <>
@@ -48,10 +55,12 @@ export default function Navbar() {
                     <li className="nav-item"><Link className="nav-link active navpop" aria-current="page" to="/login">Login</Link></li>
                     <li className="nav-item"><Link className="nav-link navpop" to="/signup">Signup</Link></li>
                 </ul> */}
+                {!localStorage.getItem('token') ?
                 <form className="d-felx ">
                     <Link className="btn btn primary navpop login" to="/login" role="button" >Login</Link>
                     <Link className="btn btn primary navpop login" to="/signup" role="button" >Signup</Link>
-                </form>
+                </form> 
+                : <button className='bnt bnt primary logout' onClick={handellogout}>Logout</button>}
                 </div>
             </div>
             </nav>

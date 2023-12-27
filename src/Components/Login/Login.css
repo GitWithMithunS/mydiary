@@ -3,7 +3,9 @@
     padding:0px;
     box-sizing: border-box;
   }
-
+.login-signup{
+    margin-bottom: 50px;
+}
 .loginmain{
     display: flex;
     justify-content: center;

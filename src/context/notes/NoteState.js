@@ -15,7 +15,7 @@ const NoteState = (props) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IwZDBiOTMxNGRkOTE1ZjRlODhlNiIsImlhdCI6MTcwMjU2MzA5NH0.LmXQ1RWM4kBV0fGv7zQDO2iCI3yGIts23NlrxHE7F24"
+        "Authorization": localStorage.getItem('token')
       },
     });
     //console.log(response) //-->response still hold a promise which should be resolvedd to see itsoutput. 
@@ -36,7 +36,7 @@ const NoteState = (props) => {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       headers: {
         "Content-Type": "application/json",        //use   authTokenand not auth-token
-        "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IwZDBiOTMxNGRkOTE1ZjRlODhlNiIsImlhdCI6MTcwMjU2MzA5NH0.LmXQ1RWM4kBV0fGv7zQDO2iCI3yGIts23NlrxHE7F24"
+        "Authorization": localStorage.getItem('token')
       },
       body: JSON.stringify({ title, description, tag }), // body data type must match "Content-Type" header
     });
@@ -59,13 +59,14 @@ const NoteState = (props) => {
       method: "DELETE", // *GET, POST, PUT, DELETE, etc.
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IwZDBiOTMxNGRkOTE1ZjRlODhlNiIsImlhdCI6MTcwMjU2MzA5NH0.LmXQ1RWM4kBV0fGv7zQDO2iCI3yGIts23NlrxHE7F24"
+        "Authorization": localStorage.getItem('token')
       },
     });
     // const json = response.json();
     // console.log("response fromm delete frontend",json)
     const newnote = notes.filter((note) => { return note._id !== id })
     setnotes(newnote)
+    
   }
 
 
@@ -81,7 +82,7 @@ const NoteState = (props) => {
       method: "PUT", // *GET, POST, PUT, DELETE, etc.
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1N2IwZDBiOTMxNGRkOTE1ZjRlODhlNiIsImlhdCI6MTcwMjU2MzA5NH0.LmXQ1RWM4kBV0fGv7zQDO2iCI3yGIts23NlrxHE7F24"
+        "Authorization": localStorage.getItem('token')
       },
       body: JSON.stringify({ title, description, tag }), // body data type must match "Content-Type" header
     });

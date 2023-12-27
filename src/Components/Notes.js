@@ -3,15 +3,25 @@ import { useContext } from 'react'
 import notecontext from '../context/notes/NoteContext'
 import NotesItem from './NotesItem'
 import AddNote from './AddNote'
+import {  useNavigate } from 'react-router-dom'
 
-export default function Notes() {
+
+export default function Notes(props) {
     const context = useContext(notecontext)
+    const navigate = useNavigate()
     const { notes, getallnotes,editnote } = context    //destructuring
 
     const [note,setnote] = useState({_id:"" ,title:"",description:"",tag:""})
    
     useEffect(() => {
-        getallnotes()
+        if(localStorage.getItem('token')){
+            getallnotes()
+            console.log("token")
+        }
+        else{
+            navigate('/login')
+            props.showalert('login to your account to get your notes','info')
+        }
         // eslint-disable-next-line
     }, [])
 
@@ -22,18 +32,17 @@ export default function Notes() {
         refopen.current.click()           //.click() here is to click on point were the ref is pointing currently.
         setnote(currentNote)
     }
-
+    
     const onchange = (e) => {
         setnote({...note , [e.target.name]: e.target.value})
-        console.log("onchange is active")
-       
-      }
-      const handleclicked = (e) => {
-       console.log("updating the note..",note)
+        
+    }
+    const handleclicked = (e) => {
+        console.log("updating the note..",note)
         e.preventDefault() 
         editnote(note._id,note.title,note.description,note.tag)
-        console.log("editnote from notes after update is clicked",editnote)
         refclose.current.click()   
+        props.showalert("Notes updated successfully" , "warning")
 
       }
   
@@ -41,8 +50,8 @@ export default function Notes() {
 
     return (
         <>
-            <h1 className="text-center my-5">MyDiary - your info is secure in the cloud</h1>
-            <AddNote />
+            <h1 className="text-center my-5" style={{cursor:"-webkit-grab"}}>MyDiary - your info is secure in the cloud</h1>
+            <AddNote showalert={props.showalert}/>
 
             <button ref={refopen} type="button" className="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Launch demo modal
@@ -92,7 +101,7 @@ export default function Notes() {
                 {notes.length === 0 && 'No notes to display'}
                 </div>
                 {notes.map((element) => {
-                    return <NotesItem keys={element._id} updatenote={updateNote} note={element} />
+                    return <NotesItem keys={element._id} updatenote={updateNote} note={element} showalert={props.showalert} />
                 })}
             </div>
         </>

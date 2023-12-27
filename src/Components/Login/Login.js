@@ -7,7 +7,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faLock, faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
 
-export default function Login() {
+export default function Login(props) {
+    const {showalert} = props
+
     // const history = useHistory()
     const navigate = useNavigate();
     
@@ -30,9 +32,10 @@ export default function Login() {
             console.log(stor)
             // history.push('/')  useHistory hoook is not used anymore in react
             navigate("/")
+            showalert("login successfull","success")
           }
           else{
-            alert('invalid credientials')
+            showalert("Invalid Details","danger")
           }
     }
 
@@ -46,7 +49,7 @@ export default function Login() {
             <div className="container loginmain">
                 <div className="wrapper">
                     <form  onSubmit={handlesubmit}>
-                        <h1>Login</h1>
+                        <h1 className='login-signup'>Login to your Account</h1>
                         {/* <div className="input-box">    //too use this --> import {faUser} from '@fortawesome/free-solid-svg-icons'
                             <input type="text" placeholder='Username' value={credentials.username} onChange={onchange} required />
                             <div className="icon"><FontAwesomeIcon icon={faUser} /></div>

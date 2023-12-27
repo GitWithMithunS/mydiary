@@ -20,7 +20,7 @@ const NotesItem = (props) => {
                             <p className="card-text">{note.description}</p>
                             {/* <a href="/" className="btn btn-primary">Go somewhere</a> */}
                             <div className="d-flex justify-content-end ">
-                            <FontAwesomeIcon className="icon  mx-4" fade  icon={faTrash} onClick={() => {deletenote(note._id)}} style={{color: "#16cdda",}} />
+                            <FontAwesomeIcon className="icon  mx-4" fade  icon={faTrash} onClick={() => {deletenote(note._id);props.showalert("Notes deleted successfully" , "warning")} } style={{color: "#16cdda",}} />
                             <FontAwesomeIcon className="icon " data-bs-toggle="modal" data-bs-target="#exampleModal" bounce icon={faPenToSquare} onClick={()=> {updatenote(note)}} style={{color: "#16cdda",}} />
                             </div>
                         </div>                                                                     
