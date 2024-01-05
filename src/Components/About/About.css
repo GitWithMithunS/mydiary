@@ -1,0 +1,42 @@
+.navbar{
+    background-color: aqua;
+    width: 100%;
+    height: 50px;
+    color: aqua ;
+}
+.bg-body-tertiary{
+    background-color: aliceblue;
+}
+.navbar-expand-lg{
+    background-color: aliceblue;
+}
+.data-bs-theme{
+    background-color: aliceblue;
+    height: 500px;
+}
+.form-check-label{
+    cursor: grab;
+}
+.form-check-input{
+    cursor:-webkit-grab;
+}
+#aboutpage{
+    margin-top: 50px;
+    border-radius: 10px;
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+    
+   
+}
+.btnheader{
+    background-color: transparent;
+    border: 1px solid rgba(184, 82, 14, 0.589);
+    padding: 5px 20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+}

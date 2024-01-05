@@ -3,7 +3,7 @@ const router = express.Router();
 const { body, validationResult } = require("express-validator");
 const fetchUser = require("../Middleware/Fetchuserdata");
 const Note = require("../mongoose_models/Notes");
-const fetchuser = require("../Middleware/Fetchuserdata");
+const gfetchUser = require("../Middleware/Gfetch");
 
 //Route 1 :get all notes of user using : GET '/api/note'. login required
 router.get("/fetchallnotes", fetchUser, async (req, res) => {
@@ -15,6 +15,30 @@ router.get("/fetchallnotes", fetchUser, async (req, res) => {
     res.status(500).send("internal server error occured");
   }
 });
+
+
+
+
+
+//google user fetch
+router.get("/gfetchallnotes", gfetchUser, async (req, res) => {
+  try {
+    const Notes = await Note.find({ user: req.user });
+    res.json(Notes);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("internal server error occured");
+  }
+});
+
+
+
+
+
+
+
+
+
 
 //Route 2 :add a new note  using : GET '/api/note'. login required
 router.post(
@@ -55,7 +79,7 @@ router.post(
 );
 
 //Route 3 :update an existing note  using : PUT '/api/note'. login required
-router.put("/updatenote/:id", fetchuser, async (req, res) => {
+router.put("/updatenote/:id", fetchUser, async (req, res) => {
   const { title, description, tag } = req.body;
 
   try {
@@ -95,7 +119,7 @@ router.put("/updatenote/:id", fetchuser, async (req, res) => {
 });
 
 //Route 4 :delete an existing note  using : DELETE '/api/note'. login required
-router.delete("/deletnote/:id", fetchuser, async (req, res) => {
+router.delete("/deletnote/:id", fetchUser, async (req, res) => {
 
   try {
     //find the note to be deleted and delete it

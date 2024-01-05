@@ -1,17 +1,3 @@
-// import React from 'react'
-
-// export default function Alert(props) {
-//     return (
-//         <>
-//             <div className="alert alert-primary" role="alert" style={{ zIndex: '9' ,top:"50px"}}>
-//                 {props.message}
-             
-//             </div>
-
-
-//         </>
-//     )
-// }
 import React from 'react'
 
 export default function Alert(props) {
@@ -31,7 +17,7 @@ export default function Alert(props) {
       <div style={{height:'50px'}}>
 
           {props.alert && 
-          <div className={`alert alert-${props.alert.type} alert-dismissible fade show role="alert"`} style={{ zIndex: '9' ,top:"50px"}}>
+          <div className={`alert alert-${props.alert.type} alert-dismissible fade show role="alert"`} style={{ zIndex: '9',position:'fixed' ,top:"50px"}}>
             <strong>{Capitalize(props.alert.type)}</strong> : {props.alert.msg} 
           </div>}
       </div>

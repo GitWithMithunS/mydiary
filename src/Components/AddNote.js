@@ -8,7 +8,6 @@ export default function AddNote(props) {
 
     const [note,setnote] = useState({title:"",desc:"",tag:""})
 
-    
     const onchange = (e) => {
       setnote({...note , [e.target.name]: e.target.value})
       console.log("onchange is active")
@@ -20,12 +19,10 @@ export default function AddNote(props) {
       // console.log(note)
       setnote({title:"",desc:"",tag:""})
       props.showalert("Notes added successfully" , "warning")
-  
     }
 
   return (
-      <>
-      
+      <> 
       <div className='container my-3'><h1>Add a Note</h1>
         <form className='my-3'>
           <div className="mb-3">
@@ -43,9 +40,7 @@ export default function AddNote(props) {
           </div>
           <button type="submit" disabled={note.title.length<3 || note.desc.length<5} className="btn btn-primary" onClick={handleclick}>Add Note</button>
         </form>
-       
       </div>
-    
     </>
   )
 }

@@ -12,6 +12,7 @@ export default function Navbar() {
     localStorage.removeItem('token')
     navigate('/login')
   }
+
   
   return (
     // <>
@@ -60,7 +61,7 @@ export default function Navbar() {
                     <Link className="btn btn primary navpop login" to="/login" role="button" >Login</Link>
                     <Link className="btn btn primary navpop login" to="/signup" role="button" >Signup</Link>
                 </form> 
-                : <button className='bnt bnt primary logout' onClick={handellogout}>Logout</button>}
+                : <button className='bnt bnt primary logout' onClick={handellogout}>Logout</button>} 
                 </div>
             </div>
             </nav>

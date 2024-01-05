@@ -39,12 +39,13 @@ import {
 } from "react-router-dom";
 import Navbar from './Components/Navbar/Navbar';
 import Home from './Components/Home';
-import About from './Components/About';
+import About from './Components/About/About';
 import NoteState from './context/notes/NoteState';
 import Alert from './Components/Alert';
 import Login from './Components/Login/Login';
 import Signup from './Components/Login/Signup';
 import { useState } from 'react';
+// import NoteId from './Components/NoteId';
 
 function App() {
 
@@ -73,6 +74,7 @@ function App() {
               <Route path="/about" element={<About showalert={showalert}/>} />
               <Route path="/login" element={<Login showalert={showalert}/>} />
               <Route path="/signup" element={<Signup showalert={showalert}/>} />
+              {/* <Route path="/note._id" element={<NoteId showalert={showalert}/>} /> */}
             </Routes>
           </div>
         </BrowserRouter>

@@ -29,7 +29,7 @@ const NoteState = (props) => {
 
   //ADD A NOTE
   const addnote = async (title, description, tag) => {
-    // console.log(`adding a new note `)
+    console.log(`adding a new note `)
 
     // todo : api call
     const response = await fetch(`${host}/api/note/addnotes`, {
@@ -41,7 +41,7 @@ const NoteState = (props) => {
       body: JSON.stringify({ title, description, tag }), // body data type must match "Content-Type" header
     });
     const addingnote = await response.json(); // parses JSON response into native JavaScript objects
-    // console.log("addingnote contains",addingnote)
+    console.log("addingnote contains",addingnote)
     setnotes(notes.concat(addingnote))       // setNotes([...notes, newNote]);  here i am using (...)spread operator to make a new array containing old and newnote thus not mutating(or changing,interfering) the old note which may be used to re-render(or access) when required
     //notes.push(note) can not be used becoz :- concat returns an arraywhereas push updates an array
   }

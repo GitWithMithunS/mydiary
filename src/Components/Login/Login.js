@@ -1,61 +1,69 @@
 import React, { useState } from 'react'
 import {
-    Link,useNavigate
+    Link, useNavigate
 } from "react-router-dom";
 import './Login.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {  faLock, faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import { faLock, faEnvelope } from '@fortawesome/free-solid-svg-icons'
+
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google'
+import { jwtDecode } from "jwt-decode";
+// import {gapi} from 'gapi-script'
 
 
 export default function Login(props) {
-    const {showalert} = props
+    const { showalert } = props
 
     // const history = useHistory()
     const navigate = useNavigate();
-    
-    const [credentials,setcredentials] = useState({email:"" ,password:""})
-    
+
+    const [credentials, setcredentials] = useState({ email: "", password: "" })
+
     const handlesubmit = async (e) => {
         e.preventDefault()     //to prevent the page from reloading (as a button(here login btn) is clicked it  tends to reload the page)
         const response = await fetch("http://localhost:4000/api/auth/login", {
             method: "POST",
             headers: {
-              "Content-Type": "application/json",
+                "Content-Type": "application/json",
             },
-            body : JSON.stringify ({email:credentials.email,password:credentials.password})
-          });
-          const json =  await response.json()
-          console.log(json)
-          if (json.authToken){
+            body: JSON.stringify({ email: credentials.email, password: credentials.password })
+        });
+        const json = await response.json()
+        console.log(json)
+        if (json.authToken) {
             //save the auth-token(authorization) and redirect
-            let stor = localStorage.setItem('token',json.authToken)
+            let stor = localStorage.setItem('token', json.authToken)
             console.log(stor)
             // history.push('/')  useHistory hoook is not used anymore in react
             navigate("/")
-            showalert("login successfull","success")
-          }
-          else{
-            showalert("Invalid Details","danger")
-          }
+            showalert("login successfull", "success")
+        }
+        else {
+            showalert("Invalid Details", "danger")
+        }
     }
 
     const onchange = (e) => {
-        setcredentials({...credentials,[e.target.name]:e.target.value}) 
+        setcredentials({ ...credentials, [e.target.name]: e.target.value })
     }
 
 
+    // var accesstoken = gapi.auth.getToken().access_token
+    // console.log(accesstoken)
+
     return (
         <>
+            {/* login form for user */}
             <div className="container loginmain">
                 <div className="wrapper">
-                    <form  onSubmit={handlesubmit}>
+                    <form onSubmit={handlesubmit}>
                         <h1 className='login-signup'>Login to your Account</h1>
                         {/* <div className="input-box">    //too use this --> import {faUser} from '@fortawesome/free-solid-svg-icons'
                             <input type="text" placeholder='Username' value={credentials.username} onChange={onchange} required />
                             <div className="icon"><FontAwesomeIcon icon={faUser} /></div>
                         </div> */}
                         <div className="input-box">
-                            <input type="email" placeholder='my-user@gmail.com' name="email" value={credentials.email} onChange={onchange}  required />
+                            <input type="email" placeholder='my-user@gmail.com' name="email" value={credentials.email} onChange={onchange} required />
                             <div className="icon"><FontAwesomeIcon icon={faEnvelope} /></div>
                         </div>
                         <div className="input-box">
@@ -68,12 +76,30 @@ export default function Login(props) {
                             <Link rel="stylesheet" href="#" >   <code>Forgot Password ?</code> </Link>
                         </div>
 
-                        <button type='submit' >Login</button>
+                        <button type='submit'  >Login</button>
 
                         <div className="register-link">
                             <p>Don't have an account ? </p> <Link to="/signup"> Register</Link>
                         </div>
                     </form>
+
+                    {/* signin or login in with google */}
+                    <p className='or'>------------------------<strong>or</strong>--------------------------</p>
+                    <div className='googlesign'>
+                        <GoogleOAuthProvider clientId="905958266804-r8k1vksvvtd2nh82egrc4bns9g8j1505.apps.googleusercontent.com">
+                            <GoogleLogin
+                                onSuccess={credentialResponse => {
+                                    console.log(credentialResponse);
+                                    const token = credentialResponse.credential
+                                    const decoded = jwtDecode(token);
+                                    console.log(decoded);
+                                }}
+                                onError={() => {
+                                    console.log('Login Failed');
+                                }}
+                            />
+                        </GoogleOAuthProvider>
+                    </div>
                 </div>
             </div>
         </>
